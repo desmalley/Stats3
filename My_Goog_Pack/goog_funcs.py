@@ -3,8 +3,8 @@ from oauth2client.service_account import ServiceAccountCredentials
 from pprint import pprint
 
 
-json_key='dnd-apr-2020-eaa3f3bf8046.json'
-file_name='dnd (Responses)'
+json_key='stats-3-apr-2020-eabd06cd7b45.json'
+file_name='Student Initial Info (Responses)'
 username_col= 1#username column index in sheet (python style starting at 0)
 
 scope = [ 'https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
@@ -12,7 +12,8 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name(json_key,scope)
 gc = gspread.authorize(credentials)
 
 
-#****
+#********SHEET API LIST FUNCS*************************************
+#*****************************************************************
 def get_goog_data():
     wks= gc.open(file_name).sheet1 #gives first sheet of this file
     #pprint(wks.get_all_records())
@@ -42,3 +43,33 @@ def convert_to_dict(my_list_short, keys):
         for index in range(len(keys)):
                 my_dict.update({keys[index]:my_list[index]})
         return my_dict
+        
+#********SHEET API DICT FUNCS*************************************       
+#*****************************************************************        
+def lists_to_dicts(list_of_lists):
+    topics=list_of_lists[0]
+    topic_num=len(topics)
+    rows=list_of_lists[1:]
+    list_of_dicts=[]
+    for row in rows:
+        stud_dict={}
+        for topic_index in range(topic_num):
+            try:
+                key=topics[topic_index]
+                value=row[topic_index]
+                stud_dict.update({key:value})  
+            except IndexError:
+                key=topics[topic_index]
+                value=None
+                stud_dict.update({key:value})  
+        list_of_dicts.append(stud_dict)
+    return list_of_dicts
+        
+def find_user(username,list_of_dicts):
+    user_list=[]
+    for elem in list_of_dicts:
+        if username in elem['First Name'] or username in elem['Last Name']:     
+#                if username == elem[username_col]: #strict
+            user_dict=elem
+    return user_dict        
+        
