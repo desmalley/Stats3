@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+{% if my_stud %}
+        <h1>DND SPEC SHEET FOR:  {{my_stud.name}}</h1>
+        <p>Stats:</p>
+        <ul>
+          <li>code level: {{my_stud.code_level}} </li>
+          <li>art level: {{my_stud.art_level}} </li>
+          <li>fab level: {{my_stud.fab_level}} </li>
+        </ul>
+{% else %}
+  <h1>Sorry, no such user</h1>
+{% endif %}
+
+</body>
+</html>
