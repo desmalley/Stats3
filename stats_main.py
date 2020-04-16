@@ -32,16 +32,15 @@ app = Flask(__name__)
 def hello_world():
     return 'Bello, World!'
 
-#@app.route('/index')
-#def compare():
-#        return render_template('compare.html',topics=topics, lol=lol[1:])
+@app.route('/index')
+def compare():
+    return render_template('compare.html',my_group=my_group)
 
 @app.route('/user/<username>')
 def show_user_profile(username):
-        
-        my_stud=find_stud(username, my_group)
-        print(my_stud)
-        return render_template('spec.html',my_stud=my_stud)
+    my_stud=find_stud(username, my_group)
+    print(my_stud)
+    return render_template('spec.html',my_stud=my_stud)
 
 
 

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>EHL GROUP SPEC SHEET FOR:  {{my_group.names}}</h1>
+<p><h2>Stats:</h2></p>
+
+<table style="width:100%" >
+  <tr>
+    <th align="left">Top Lists</th>
+    <th align="left">Links</th> 
+
+  </tr>
+  <tr>
+    <td>
+		{% if my_group %}
+			<ul>
+			  <li> <h3>Top Coders:</h3>  </li>
+					<ol>
+						{% for i in range(5) %}
+							<li>{{ my_group.code_ranked[i].name}}
+						{% endfor %}
+					</ol>
+			  <li><h3>Top Artists:</h3>  </li>
+					<ol>
+						{% for i in range(5) %}
+							<li>{{ my_group.art_ranked[i].name}}
+						{% endfor %}
+					</ol>		  
+			  <li><h3>Top Fabbers:</h3> </li>
+					<ol>
+						{% for i in range(5) %}
+							<li>{{ my_group.fab_ranked[i].name}}
+						{% endfor %}
+					</ol>
+			  <li><h3>Top Makers:</h3>  </li>
+					<ol>
+						{% for i in range(5) %}
+							<li>{{ my_group.shop_ranked[i].name}}
+						{% endfor %}
+					</ol>
+			  <li><h3>Top Writers:</h3>  </li>
+					<ol>
+						{% for i in range(5) %}
+							<li>{{ my_group.writing_ranked[i].name}}
+						{% endfor %}
+					</ol>
+			</ul>
+
+		{% else %}
+		  <h1>Sorry, no such user</h1>
+		{% endif %}
+
+	</td>
+    <td width="50%">
+		<font size="6">
+			{% for name in my_group.names %}
+				{% set my_url= 'user/'+name  %}
+				<li><a href={{my_url}}>{{name}}</a>
+			{% endfor %}
+	</td>
+		</font>
+  </tr>
+
+</table>
+
+
+
+</body>
+</html>
