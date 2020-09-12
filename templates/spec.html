@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<body>
+{% if my_stud %}
+        <h1><h2>DND SPEC SHEET FOR:  {{my_stud.name}}</h2></h1>
+		{% set name = my_stud.name+'.png' %}
+			<img src="{{url_for('static', filename=name)}}" />		
+			<p><h3>Stats:</h3></p>
+			<h2>
+			<ul>
+			  <li>code: {{my_stud.code_level}} </li>
+			  <li>art: {{my_stud.art_level}} </li>
+			  <li>fab: {{my_stud.fab_level}} </li>
+			  <li>shop: {{my_stud.shop_level}} </li>
+			  <li>writing: {{my_stud.writing_level}} </li>
+			</ul>
+			</h2>
+{% else %}
+  <h1>Sorry, no such user</h1>
+{% endif %}
+
+
+
+<ul>
+{% for key in my_stud.data %}
+	<li><b>{{key}}</b>:{{my_stud.data[key]}}
+{% endfor %}
+</ul>
+<p>
+
+<table style="width:100%">
+  <tr>
+    <th>Picture 1</th>
+    <th>Picture 2</th> 
+
+  </tr>
+  <tr>
+    <td>
+		{% if my_stud.data["Upload an image of art you've created that you're proud of"]%}
+		{% set list1,list2 = my_stud.data["Upload an image of art you've created that you're proud of"].split('=') %}
+		{% set my_string = "https://drive.google.com/uc?id=" + list2 %}
+			<img src={{my_string}} alt="Picture 1" height="400" width="400" class="rotateimg180">
+		{% else %}
+
+		{% endif %}
+	</td>
+    <td>
+		{% if my_stud.data["Invent something, draw a picture of it, take a photo of the drawing and upload it here."]%}
+		{% set list1,list2 = my_stud.data["Invent something, draw a picture of it, take a photo of the drawing and upload it here."].split('=') %}
+		{% set my_string = "https://drive.google.com/uc?id=" + list2 %}
+			<img src={{my_string}} alt="Picture 2" height="400" width="400" class="rotateimg90" >
+		{% else %}
+
+		{% endif %}
+	</td>
+  </tr>
+
+</table>
+
+</p>
+<a href="/index">"Stats Page"</a>
+
+
+</body>
+</html>

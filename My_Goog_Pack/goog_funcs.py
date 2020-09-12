@@ -65,10 +65,10 @@ def lists_to_dicts(list_of_lists):
         list_of_dicts.append(stud_dict)
     return list_of_dicts
         
-def find_user(username,list_of_dicts):
-    user_list=[]
+def find_user_dict(username,list_of_dicts):
+    user_dict={}
     for elem in list_of_dicts:
-        if username in elem['First Name'] or username in elem['Last Name']:     
+        if username in elem['First Name'].lower() or username in elem['Last Name'].lower():     
 #                if username == elem[username_col]: #strict
             user_dict=elem
     return user_dict        
